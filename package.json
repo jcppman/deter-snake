@@ -1,0 +1,33 @@
+{
+  "name": "deter-snake",
+  "version": "1.0.0",
+  "description": "snake!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape -r babel-register test/**/*.js",
+    "build": "browserify index.js -t babelify -o bundle.js",
+    "lint": "eslint index.js"
+  },
+  "keywords": [
+    "snake",
+    "game"
+  ],
+  "author": "Chriest Yu <jcppman@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.1.1",
+    "tape": "^4.5.1"
+  },
+  "dependencies": {
+    "immutable": "^3.8.1",
+    "winston": "^2.2.0"
+  }
+}
