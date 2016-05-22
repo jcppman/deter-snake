@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tape -r babel-register test/**/*.js",
     "build": "browserify src/index.js -t babelify -o bundle.js",
-    "develop": "npm run test | tap-notify",
+    "develop": "npm run test | tap-notify | tap-spec",
     "lint": "eslint index.js"
   },
   "keywords": [
@@ -26,6 +26,7 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
     "tap-notify": "^1.0.0",
+    "tap-spec": "^4.1.1",
     "tape": "^4.5.1"
   },
   "dependencies": {
