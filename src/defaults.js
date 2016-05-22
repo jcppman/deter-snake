@@ -3,4 +3,5 @@ export const gameDefaults = {
   height: 20,
   initialSnake: 5,
   scoreStep: 5,
+  direction: 'right',
 };

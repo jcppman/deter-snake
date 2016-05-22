@@ -20,12 +20,12 @@ export class Game {
     this.height = config.height;
     this.initialSnake = config.initialSnake;
     this.scoreStep = config.scoreStep;
+    this.direction = config.direction;
     this.snake = Immutable.List();
     this.spaces = Immutable.Set();
     this.food = null;
     this.score = 0;
     this.status = 'new';
-    this.direction = 'right';
   }
   init(seed) {
     if (seed === undefined) {
@@ -60,7 +60,7 @@ export class Game {
     .valueSeq()
     .skip(seed % this.spaces.size)
     .first();
-    return picked === undefined ? null : picked;
+    return (picked === undefined) ? null : picked;
   }
   move(operation) {
     if (this.status === 'ended' || this.status === 'win') {
@@ -89,7 +89,7 @@ export class Game {
       case 'food':
         this.score += this.scoreStep;
         this.snake = this.snake.push(target);
-        this.food = this.putFood(seed);
+        this.putFood(seed);
         this.spaces = this.spaces.delete(this.food);
         if (this.food === null) {
           // no space available, win!
