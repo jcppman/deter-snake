@@ -25,12 +25,14 @@
     "eslint-plugin-import": "^1.8.0",
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
+    "lolex": "^1.5.0",
     "tap-notify": "^1.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1"
   },
   "dependencies": {
+    "animation-frame": "^0.2.5",
     "immutable": "^3.8.1",
-    "loglevel": "^1.4.0"
+    "right-now": "^1.0.0"
   }
 }
