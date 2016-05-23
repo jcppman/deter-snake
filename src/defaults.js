@@ -38,6 +38,15 @@ export const displayDefaults = {
   },
   font: '80px serif',
   lineHeight: 90,
+  lang: {
+    init: [
+      '[arrow keys] or [jkhl] to control',
+      'Press any control key to start',
+    ],
+    restart: [
+      'Press r to restart'
+    ],
+  },
 };
 
 export const soundDefaults = {};

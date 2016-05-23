@@ -94,7 +94,7 @@ export class Display {
       default:
       case 'new':
       case 'inited':
-        printText(['Press anykey to start', '[arrow keys] or [jkhl] to control']);
+        printText(displayDefaults.lang.init);
         break;
       case 'playing':
         // draw snake
@@ -114,7 +114,7 @@ export class Display {
         }
         break;
       case 'ended':
-        printText([`Score: ${game.score}`, 'Press r to restart']);
+        printText([`Score: ${game.score}`].concat(displayDefaults.lang.restart));
         break;
     }
   }
