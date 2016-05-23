@@ -1,11 +1,25 @@
 import test from 'tape';
 import lolex from 'lolex';
 import events from 'events';
+import { driverDefaults } from '../src/defaults';
 import { Driver } from '../src/driver';
 
 test('constructor', (t) => {
-  const driver = new Driver();
+  t.test('defaults', (st) => {
+    const defaultDriver = new Driver();
+    st.equal(defaultDriver.interval, driverDefaults.interval, 'should get the default interval');
+    st.equal(defaultDriver.direction, driverDefaults.direction, 'should get the default direction');
+    st.end();
+  });
+
+  const driver = new Driver({
+    interval: 1234,
+    direction: 'down',
+  });
   t.ok(driver instanceof events.EventEmitter, 'is an event emitter');
+  t.equal(driver.interval, 1234, 'should accept given interval');
+  t.equal(driver.direction, 'down', 'should accept given direction');
+
   t.end();
 });
 

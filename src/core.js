@@ -27,6 +27,9 @@ export class Game {
     this.score = 0;
     this.status = 'new';
   }
+  restart() {
+    this.status = 'new';
+  }
   init(seed) {
     if (seed === undefined) {
       throw new Error('seed not given');
@@ -67,14 +70,17 @@ export class Game {
       return;
     }
 
-    this.status = 'playing';
-
     const { direction, seed } = operation;
 
     if (seed === undefined) {
       throw new Error('not seed givin');
     }
 
+    if (this.status === 'new') {
+      this.init(seed);
+    }
+
+    this.status = 'playing';
     this.setDirection(direction);
 
     const target = this.nextGrid;
