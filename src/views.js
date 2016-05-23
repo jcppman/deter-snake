@@ -94,7 +94,7 @@ export class Display {
       default:
       case 'new':
       case 'inited':
-        printText('Press anykey to start');
+        printText(['Press anykey to start', '[arrow keys] or [jkhl] to control']);
         break;
       case 'playing':
         // draw snake
