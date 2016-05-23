@@ -40,11 +40,12 @@ export const displayDefaults = {
   lineHeight: 90,
   lang: {
     init: [
-      '[arrow keys] or [jkhl] to control',
-      'Press any control key to start',
+      '[arrow keys] or [jkhl]',
+      '  Or touch the screen to control',
     ],
     restart: [
-      'Press r to restart'
+      'To restart',
+      '  Press r or touch the center',
     ],
   },
 };

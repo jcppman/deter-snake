@@ -26,17 +26,21 @@ export class Controller {
     this.render();
   }
   start() {
-    this.joystick.start();
     this.joystick.on('operation', (op) => {
       if (!this.driver.isRunning) {
         logger.info('start driver');
         this.driver.start();
       }
+
       if (op === 'restart') {
-        this.game.reset();
-        this.driver.reset();
+        if (this.game.status === 'win' || this.game.status === 'ended') {
+          logger.info('restart');
+          this.game.reset();
+          this.driver.reset();
+        }
         return;
       }
+
       logger.debug('change direction', op);
       this.driver.changeDirection(op);
     });

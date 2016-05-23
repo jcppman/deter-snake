@@ -27,17 +27,21 @@ export class Display {
     const height = bottom - top;
     const screenWideness = width / height;
     logger.debug(width, height, screenWideness, this.contentWideness);
-    let style;
+    let toWidth;
+    let toHeight;
     if (screenWideness > this.contentWideness) {
       // height 100%
-      style = `width: ${height * this.contentWideness}px; height: ${height}px;`;
-      logger.debug(`make height 100% by "${style}"`);
+      logger.debug('make height 100%');
+      toWidth = `${height * this.contentWideness}px`;
+      toHeight = `${height}px`;
     } else {
       // width 100%
-      style = `width: ${width}px; height: ${width / this.contentWideness}px;`;
-      logger.debug(`make width 100% by "${style}"`);
+      logger.debug('make width 100%');
+      toWidth = `${width}px`;
+      toHeight = `${width / this.contentWideness}px`;
     }
-    this.canvas.style = style;
+    this.canvas.style.width = toWidth;
+    this.canvas.style.height = toHeight;
   }
   render(game) {
     const gridSize = this.canvas.height / game.height;
