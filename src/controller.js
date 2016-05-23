@@ -1,7 +1,7 @@
 import { Logger } from './logger';
 import { Joystick } from './joystick';
 import { Game } from './core';
-import { Display } from './views';
+import { Display, Sound } from './views';
 import { Driver } from './driver';
 import AnimationFrame from 'animation-frame';
 import Immutable from 'immutable';
@@ -14,7 +14,7 @@ export class Controller {
     game = new Game(),
     driver = new Driver(),
     joystick = new Joystick(),
-    views = [new Display(game.width / game.height)]
+    views = [new Display(game.width / game.height), new Sound()]
   ) {
     this.game = game;
     this.driver = driver;
@@ -71,7 +71,7 @@ export class Controller {
       this.lastSnake = this.game.snake;
       this.lastStatus = this.game.status;
       this.views.forEach((v) => {
-        v.render(this.game);
+        v.render(this.game, this.driver);
       });
     });
   }
