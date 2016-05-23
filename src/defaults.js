@@ -36,6 +36,8 @@ export const displayDefaults = {
     normal: '#306230',
     emphase: '#0F380F',
   },
+  font: '80px serif',
+  lineHeight: 90,
 };
 
 export const soundDefaults = {};

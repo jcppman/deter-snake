@@ -27,7 +27,7 @@ export class Game {
     this.score = 0;
     this.status = 'new';
   }
-  restart() {
+  reset() {
     this.status = 'new';
   }
   init(seed) {

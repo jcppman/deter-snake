@@ -11,6 +11,7 @@ export class Driver extends events.EventEmitter {
     const config = Object.assign({}, driverDefaults, _config);
 
     this.lastTime = getTime();
+    this.config = config;
     this.direction = config.direction;
     this.initialInterval = config.interval;
     this.speedFactor = 0;
@@ -60,6 +61,11 @@ export class Driver extends events.EventEmitter {
       seed: this.seed,
       direction: this.direction,
     });
+  }
+  reset() {
+    this.pause();
+    this.speedFactor = 0;
+    this.direction = this.config.direction;
   }
   get interval() {
     return Math.max(this.initialInterval - this.speedFactor * 5, 0);

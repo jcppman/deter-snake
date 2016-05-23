@@ -22,6 +22,7 @@ export class Controller {
     this.views = views;
     this.lastSnake = null;
     this.lastFood = null;
+    this.lastStatus = null;
     this.render();
   }
   start() {
@@ -32,7 +33,8 @@ export class Controller {
         this.driver.start();
       }
       if (op === 'restart') {
-        this.game.restart();
+        this.game.reset();
+        this.driver.reset();
         return;
       }
       logger.debug('change direction', op);
@@ -56,12 +58,14 @@ export class Controller {
       this.render();
       if (
         Immutable.is(this.lastFood, this.game.food) &&
-        Immutable.is(this.lastSnake, this.game.snake)
+        Immutable.is(this.lastSnake, this.game.snake) &&
+        this.lastStatus === this.game.status
       ) {
         return;
       }
       this.lastFood = this.game.food;
       this.lastSnake = this.game.snake;
+      this.lastStatus = this.game.status;
       this.views.forEach((v) => {
         v.render(this.game);
       });

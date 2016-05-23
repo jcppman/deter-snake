@@ -40,14 +40,36 @@ export class Display {
     this.canvas.style = style;
   }
   render(game) {
+    const gridSize = this.canvas.height / game.height;
+
     const drawGrid = (x, y, isSolid) => {
-      const gridSize = this.canvas.height / game.height;
       this.ctx[isSolid ? 'fillRect' : 'strokeRect'](
         x * gridSize,
         y * gridSize,
         gridSize,
         gridSize
       );
+    };
+
+    const printText = (content) => {
+      const lines = content instanceof Array ? content : [content];
+
+      this.ctx.fillStyle = displayDefaults.palette.normal;
+      this.ctx.strokeStyle = displayDefaults.palette.emphase;
+      this.ctx.textAlign = 'center';
+      this.ctx.font = displayDefaults.font;
+
+      const len = lines.length;
+      const offsetX = this.canvas.width / 2;
+      const offsetY = (this.canvas.height - displayDefaults.lineHeight * len) / 2;
+
+      lines.forEach((line, i) => {
+        this.ctx.fillText(
+          line,
+          offsetX,
+          offsetY + i * displayDefaults.lineHeight
+        );
+      });
     };
 
     logger.debug('render to canvas');
@@ -68,23 +90,32 @@ export class Display {
       }
     }
 
-    // draw snake
-    if (game.snake !== null) {
-      this.ctx.fillStyle = displayDefaults.palette.normal;
-      this.ctx.strokeStyle = displayDefaults.palette.normal;
-      game.snake.forEach((grid) => {
-        drawGrid(grid.get('x'), grid.get('y'), true);
-      });
-    }
+    switch (game.status) {
+      default:
+      case 'new':
+      case 'inited':
+        printText('Press anykey to start');
+        break;
+      case 'playing':
+        // draw snake
+        if (game.snake !== null) {
+          this.ctx.fillStyle = displayDefaults.palette.normal;
+          this.ctx.strokeStyle = displayDefaults.palette.normal;
+          game.snake.forEach((grid) => {
+            drawGrid(grid.get('x'), grid.get('y'), true);
+          });
+        }
 
-    // draw food
-    if (game.food !== null) {
-      this.ctx.fillStyle = displayDefaults.palette.emphase;
-      this.ctx.strokeStyle = displayDefaults.palette.emphase;
-      drawGrid(game.food.get('x'), game.food.get('y'), true);
+        // draw food
+        if (game.food !== null) {
+          this.ctx.fillStyle = displayDefaults.palette.emphase;
+          this.ctx.strokeStyle = displayDefaults.palette.emphase;
+          drawGrid(game.food.get('x'), game.food.get('y'), true);
+        }
+        break;
+      case 'ended':
+        printText([`Score: ${game.score}`, 'Press r to restart']);
+        break;
     }
   }
-}
-export class Sound {
-  render() {}
 }
