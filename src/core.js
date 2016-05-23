@@ -28,6 +28,7 @@ export class Game {
     this.status = 'new';
   }
   reset() {
+    this.score = 0;
     this.status = 'new';
   }
   init(seed) {
