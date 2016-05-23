@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tape -r babel-register test/**/*.js",
     "build": "browserify src/index.js -t babelify -o bundle.js",
-    "develop": "npm run test | tap-notify | tap-spec",
+    "release": "browserify src/index.js -t babelify | uglifyjs --compress --mangle - > bundle.js",
+    "develop": "npm run test | tap-notify | tap-spec; npm run build;",
     "lint": "eslint index.js"
   },
   "keywords": [
@@ -28,7 +29,8 @@
     "lolex": "^1.5.0",
     "tap-notify": "^1.0.0",
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "uglify-js": "^2.6.2"
   },
   "dependencies": {
     "animation-frame": "^0.2.5",
