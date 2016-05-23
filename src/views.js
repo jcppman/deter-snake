@@ -19,6 +19,7 @@ export class Display {
 
     this.maximize();
     window.addEventListener('resize', () => this.maximize());
+    window.addEventListener('deviceorientation', () => this.maximize());
   }
   maximize() {
     // same behavior as css background-size: contain
