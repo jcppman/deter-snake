@@ -1,15 +1,15 @@
 const INITIAL_DIRECTION = 'right';
 
 export const gameDefaults = {
-  width: 30,
-  height: 20,
+  width: 20,
+  height: 15,
   initialSnake: 5,
   scoreStep: 5,
   direction: INITIAL_DIRECTION,
 };
 
 export const driverDefaults = {
-  interval: 1000,
+  interval: 500,
   direction: INITIAL_DIRECTION,
 };
 
@@ -28,3 +28,14 @@ export const joystickDefaults = {
   72: 'left',
   76: 'right',
 };
+
+export const displayDefaults = {
+  palette: {
+    background: '#9CBD0F',
+    foreground: '#8CAD0F',
+    normal: '#306230',
+    emphase: '#0F380F',
+  },
+};
+
+export const soundDefaults = {};

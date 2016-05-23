@@ -96,7 +96,6 @@ export class Game {
         this.score += this.scoreStep;
         this.snake = this.snake.push(target);
         this.putFood(seed);
-        this.spaces = this.spaces.delete(this.food);
         if (this.food === null) {
           // no space available, win!
           this.status = 'win';
@@ -104,7 +103,7 @@ export class Game {
         break;
       case 'empty':
         this.snake = this.snake.shift().push(target);
-        this.spaces.add(tail);
+        this.spaces = this.spaces.delete(target).add(tail);
         break;
     }
   }

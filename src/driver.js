@@ -12,7 +12,8 @@ export class Driver extends events.EventEmitter {
 
     this.lastTime = getTime();
     this.direction = config.direction;
-    this.interval = config.interval;
+    this.initialInterval = config.interval;
+    this.speedFactor = 0;
     this.status = 'paused';
     this.timer = null;
     this.updateSeed();
@@ -59,6 +60,9 @@ export class Driver extends events.EventEmitter {
       seed: this.seed,
       direction: this.direction,
     });
+  }
+  get interval() {
+    return Math.max(this.initialInterval - this.speedFactor * 5, 0);
   }
   get isRunning() {
     return this.timer !== null;

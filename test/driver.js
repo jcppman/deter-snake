@@ -35,7 +35,7 @@ test('start & pause', (t) => {
     t.pass('ticked once');
     t.equal(direction, driver.direction, 'should be the same direction');
   });
-  timer.tick(3500);
+  timer.tick(2200);
 
   driver.pause();
   driver.removeAllListeners();
@@ -80,7 +80,7 @@ test('changeDirection once per tick', (t) => {
       driver.changeDirection(target[0]);
     }
   });
-  timer.tick(4500);
+  timer.tick(2400);
   driver.pause();
 
   timer.uninstall();
@@ -103,7 +103,7 @@ test('changeDirection twice per tick', (t) => {
       t.equal(data2.direction, 'up');
     });
   });
-  timer.tick(4500);
+  timer.tick(2400);
   driver.pause();
 
   timer.uninstall();
