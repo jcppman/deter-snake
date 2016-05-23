@@ -50,4 +50,21 @@ export const displayDefaults = {
   },
 };
 
-export const soundDefaults = {};
+export const soundDefaults = {
+  ticker: {
+    type: 'square',
+    frequency: {
+      left: 220,
+      right: 261.63,
+      up: 329.63,
+      down: 392.00,
+    },
+    length: 0.07,
+    volumn: 0.1,
+  },
+  eater: {
+    type: 'sine',
+    length: 0.2,
+    volumn: 0.3,
+  },
+};

@@ -68,7 +68,7 @@ export class Driver extends events.EventEmitter {
     this.direction = this.config.direction;
   }
   get interval() {
-    return Math.max(this.initialInterval - this.speedFactor * 5, 0);
+    return Math.max(this.initialInterval - this.speedFactor * 2, 100);
   }
   get isRunning() {
     return this.timer !== null;

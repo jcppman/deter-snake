@@ -1,5 +1,7 @@
 import { Logger } from './logger';
-import { displayDefaults } from './defaults';
+import { displayDefaults, soundDefaults } from './defaults';
+
+function noop() {}
 
 const logger = new Logger('views');
 
@@ -122,5 +124,62 @@ export class Display {
         printText([`Score: ${game.score}`].concat(displayDefaults.lang.restart));
         break;
     }
+  }
+}
+
+
+export class Sound {
+  constructor() {
+    if (window.AudioContext) {
+      this.ctx = new window.AudioContext();
+
+      this.tickerOsc = this.ctx.createOscillator();
+      this.tickerOsc.type = soundDefaults.ticker.type;
+      this.tickerOsc.start();
+
+      this.ticker = this.ctx.createGain();
+      this.ticker.gain.value = 0;
+
+      this.tickerOsc.connect(this.ticker);
+      this.ticker.connect(this.ctx.destination);
+
+      this.eaterOsc = this.ctx.createOscillator();
+      this.eaterOsc.type = soundDefaults.eater.type;
+      this.eaterOsc.start();
+
+      this.eater = this.ctx.createGain();
+      this.eater.gain.value = 0;
+      this.eaterOsc.connect(this.eater);
+      this.eater.connect(this.ctx.destination);
+    } else {
+      // not supported, supress it
+      this.render = this.tick = this.eat = noop;
+    }
+
+    this.lastScore = 0;
+    window.asdf = this;
+  }
+  render(game, driver) {
+    logger.debug('play sounds');
+    this.tick(driver.direction);
+    if (this.lastScore !== game.score) {
+      this.lastScore = game.score;
+      this.eat(Math.min(game.score * 2 + 200, 1320));
+    }
+  }
+  tick(direction) {
+    const volumn = soundDefaults.ticker.volumn;
+    const length = soundDefaults.ticker.length;
+    const freq = soundDefaults.ticker.frequency[direction];
+    this.tickerOsc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+    this.ticker.gain.setValueAtTime(volumn, this.ctx.currentTime);
+    this.ticker.gain.setValueAtTime(0, this.ctx.currentTime + length);
+  }
+  eat(freq) {
+    const volumn = soundDefaults.eater.volumn;
+    const length = soundDefaults.eater.length;
+    this.eaterOsc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+    this.eater.gain.setValueAtTime(volumn, this.ctx.currentTime);
+    this.eater.gain.setValueAtTime(0, this.ctx.currentTime + length);
   }
 }
