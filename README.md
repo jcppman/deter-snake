@@ -5,6 +5,7 @@
 - support desktop & mobile
 - multiple viewers (currently Display and Sound)
 - easy-to-modify controller design
+- enjoyable sounds!
 
 ## posibilities
 
