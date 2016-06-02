@@ -54,10 +54,11 @@ export const soundDefaults = {
   ticker: {
     type: 'square',
     frequency: {
-      left: 220,
-      right: 261.63,
-      up: 329.63,
-      down: 392.00,
+      // 7th chord arpeggio
+      left: [220, 261.63, 329.63, 392.00], // A C E G
+      right: [261.63, 329.63, 392.00, 493.88], // C E G B
+      up: [329.63, 392.00, 493.88, 293.67], // E G B D
+      down: [392.00, 246.94, 293.67, 349.23] // G B D F
     },
     length: 0.07,
     volumn: 0.1,

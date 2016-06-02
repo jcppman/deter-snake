@@ -157,6 +157,7 @@ export class Sound {
     }
 
     this.lastScore = 0;
+    this.lastNote = 0; // the index of last played note in a 4 length array
     window.asdf = this;
   }
   render(game, driver) {
@@ -168,12 +169,15 @@ export class Sound {
     }
   }
   tick(direction) {
+    // TODO: decide if should reset this.lastNote to 0 when changing direction
+    // 
     const volumn = soundDefaults.ticker.volumn;
     const length = soundDefaults.ticker.length;
-    const freq = soundDefaults.ticker.frequency[direction];
+    const freq = soundDefaults.ticker.frequency[direction][(this.lastNote) % 4];
     this.tickerOsc.frequency.setValueAtTime(freq, this.ctx.currentTime);
     this.ticker.gain.setValueAtTime(volumn, this.ctx.currentTime);
     this.ticker.gain.setValueAtTime(0, this.ctx.currentTime + length);
+    this.lastNote++;
   }
   eat(freq) {
     const volumn = soundDefaults.eater.volumn;
