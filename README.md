@@ -10,3 +10,4 @@
 ## posibilities
 
 - replayable game history with small footprint: because it's deterministic!
+- add different types of food related to scale, chord, or sound type
