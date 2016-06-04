@@ -4,7 +4,7 @@
   "description": "snake!!",
   "main": "index.js",
   "scripts": {
-    "test": "tape -r babel-register test/**/*.js",
+    "test": "tape -r babel-register test/**/*.js | tap-spec",
     "build": "browserify src/index.js -t babelify -o bundle.js",
     "release": "browserify src/index.js -t babelify | uglifyjs --compress --mangle - > bundle.js",
     "develop": "npm run test | tap-notify | tap-spec; npm run build;",
